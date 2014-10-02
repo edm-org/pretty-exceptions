@@ -1,5 +1,5 @@
 {
-    "name": "phalcon/pretty-exceptions",
+    "name": "ovr/phalcon-pretty-exceptions",
     "description": "Beauty-exceptions plugin for Phalcon",
     "license": "MIT",
     "authors": [
