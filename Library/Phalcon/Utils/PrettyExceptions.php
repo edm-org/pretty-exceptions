@@ -310,38 +310,7 @@ class PrettyExceptions
 
 				echo '</table>';
 
-				$line = $trace['line'];
-				$lines = file($trace['file']);
-
-				if ($this->_showFileFragment) {
-					$numberLines = count($lines);
-					$firstLine = ($line - 7) < 1 ? 1 : $line - 7;
-					$lastLine = ($line + 5 > $numberLines ? $numberLines : $line + 5);
-					echo "<pre class='prettyprint highlight:" . $firstLine . ":" . $line . " linenums:" . $firstLine . "'>";
-				} else {
-					$firstLine = 1;
-					$lastLine = count($lines) - 1;
-					echo "<pre class='prettyprint highlight:" . $firstLine . ":" . $line . " linenums error-scroll'>";
-				}
-
-				for ($i = $firstLine; $i <= $lastLine; ++$i) {
-
-					if ($this->_showFileFragment) {
-						if ($i == $firstLine) {
-							if (preg_match('#\*\/$#', rtrim($lines[$i - 1]))) {
-								$lines[$i-1] = str_replace("* /", "  ", $lines[$i - 1]);
-							}
-						}
-					}
-
-					if ($lines[$i - 1] != PHP_EOL) {
-						$lines[$i - 1] = str_replace("\t", "  ", $lines[$i - 1]);
-						echo htmlentities($lines[$i - 1], ENT_COMPAT, 'UTF-8');
-					} else {
-						echo '&nbsp;' . "\n";
-					}
-				}
-				echo '</pre>';
+				$this->showFilePart($trace['file'], $trace['line']);
 
 				echo '<table cellspacing="0">';
 			}
@@ -468,4 +437,38 @@ class PrettyExceptions
 		return true;
 	}
 
+	protected function showFilePart($file, $line)
+	{
+		$lines = file($file);
+
+		if ($this->_showFileFragment) {
+			$numberLines = count($lines);
+			$firstLine = ($line - 7) < 1 ? 1 : $line - 7;
+			$lastLine = ($line + 5 > $numberLines ? $numberLines : $line + 5);
+			echo "<pre class='prettyprint highlight:" . $firstLine . ":" . $line . " linenums:" . $firstLine . "'>";
+		} else {
+			$firstLine = 1;
+			$lastLine = count($lines) - 1;
+			echo "<pre class='prettyprint highlight:" . $firstLine . ":" . $line . " linenums error-scroll'>";
+		}
+
+		for ($i = $firstLine; $i <= $lastLine; ++$i) {
+
+			if ($this->_showFileFragment) {
+				if ($i == $firstLine) {
+					if (preg_match('#\*\/$#', rtrim($lines[$i - 1]))) {
+						$lines[$i-1] = str_replace("* /", "  ", $lines[$i - 1]);
+					}
+				}
+			}
+
+			if ($lines[$i - 1] != PHP_EOL) {
+				$lines[$i - 1] = str_replace("\t", "  ", $lines[$i - 1]);
+				echo htmlentities($lines[$i - 1], ENT_COMPAT, 'UTF-8');
+			} else {
+				echo '&nbsp;' . "\n";
+			}
+		}
+		echo '</pre>';
+	}
 }
