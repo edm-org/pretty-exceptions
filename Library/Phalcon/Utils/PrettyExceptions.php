@@ -76,7 +76,7 @@ class PrettyExceptions
 	/**
 	 * Constructor
 	 *
-	 * @param Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
+	 * @param \Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
 	 */
 	public function __construct($application = null) {
 		$this->_application =& $application;
