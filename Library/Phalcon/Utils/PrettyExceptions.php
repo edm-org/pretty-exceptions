@@ -351,7 +351,7 @@ class PrettyExceptions
 	/**
 	 * Returns human readable dump of the current Phalcon application instance.
 	 *
-	 * @param Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
+	 * @param \Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
 	 */
 	protected function getApplicationDump($application) {
 		$application = is_null($application) ? $this->_application : $application;
@@ -366,8 +366,8 @@ class PrettyExceptions
 	/**
 	 * Handles exceptions
 	 *
-	 * @param Exception $e
-	 * @param Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
+	 * @param \Exception $e
+	 * @param \Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
 	 * @return boolean
 	 */
 	public function handle($e, $application = null)
@@ -417,7 +417,7 @@ class PrettyExceptions
 	 * @param string $errorMessage
 	 * @param string $errorFile
 	 * @param int $errorLine
-	 * @param Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
+	 * @param \Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
 	 */
 	public function handleError($errorCode, $errorMessage, $errorFile, $errorLine, $application = null)
 	{
