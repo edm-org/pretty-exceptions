@@ -68,6 +68,12 @@ class PrettyExceptions
 	static protected $_showActive = false;
 
 	/**
+	 * Path to Phalcon source files (ZEP)
+	 * @var string
+	 */
+	protected $_cphalconPath = '';
+
+	/**
 	 * Constructor
 	 *
 	 * @param Phalcon\Mvc\Application $application OPTIONAL To display a dump of the current state of the Phalcon application instance.
@@ -134,6 +140,17 @@ class PrettyExceptions
 	public function showBackTrace($showBackTrace)
 	{
 		$this->_showBackTrace = $showBackTrace;
+	}
+
+
+	/**
+	 * Set path to Phalcon source code (ZEP)
+	 *
+	 * @param string $cphalconPath
+	 */
+	public function cphalconPath($cphalconPath)
+	{
+		$this->_cphalconPath = $cphalconPath;
 	}
 
 	/**
@@ -443,6 +460,17 @@ class PrettyExceptions
 
 	protected function showFilePart($file, $line)
 	{
+		if ('zep' == pathinfo($file, PATHINFO_EXTENSION) && !is_file($file))
+		{
+			$file = $this->_cphalconPath . $file;
+		}
+
+		if (!is_file($file))
+		{
+			echo '<pre>Note: file "' . $file . '" content not available</pre>';
+			return;
+		}
+
 		$lines = file($file);
 
 		if ($this->_showFileFragment) {

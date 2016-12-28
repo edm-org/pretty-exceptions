@@ -103,6 +103,24 @@ $p->setTheme('default');
 
 ```
 
+## Zephir Sources
+
+Sometimes exception is thrown from Phalcon Zephir sources (*.zep). To show it you should set path to `cphalcon` sources
+
+```
+php
+
+$p = new \Phalcon\Utils\PrettyExceptions();
+$p->cphalconPath('/<path-to>/cphalcon/');
+```
+
+Please follow the [Phalcon installation instructions](https://phalconphp.com/en/download) to get cphalcon sources.
+For now the way to get sources (without compilation) is
+
+```
+git clone --depth=1 git://github.com/phalcon/cphalcon.git <path-to>/cphalcon
+```
+
 ## Live Demo
 
 A live demo is available [here](http://test.phalconphp.com/exception.html) and [here](http://test.phalconphp.com/exception2.html)
