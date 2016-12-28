@@ -165,7 +165,7 @@ class PrettyExceptions
 	 */
 	public function getVersion()
 	{
-		if(class_exists("\Phalcon\Version")){
+		if(class_exists('\Phalcon\Version')){
 			$version = \Phalcon\Version::get();
 		}else{
 			$version = "git-master";
