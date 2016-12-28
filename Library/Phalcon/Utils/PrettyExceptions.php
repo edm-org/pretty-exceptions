@@ -361,7 +361,11 @@ class PrettyExceptions
 		</div>';
 
 		if ($this->_showBackTrace) {
-			echo '<div class="error-backtrace"><table cellspacing="0">';
+			echo '<div class="error-backtrace">';
+
+			$this->showFilePart($e->getFile(), $e->getLine());
+
+			echo '<table cellspacing="0">';
 			foreach ($e->getTrace() as $n => $trace) {
 				$this->_showTraceItem($n, $trace);
 			}
